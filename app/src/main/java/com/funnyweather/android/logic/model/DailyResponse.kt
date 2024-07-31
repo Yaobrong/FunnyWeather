@@ -55,15 +55,15 @@ data class DailyResponse(
     data class Cloudrate(
         val avg: Double,
         val date: String,
-        val max: Int,
-        val min: Int
+        val max: Double,
+        val min: Double
     )
 
     data class Dswrf(
         val avg: Double,
         val date: String,
         val max: Double,
-        val min: Int
+        val min: Double
     )
 
     data class Humidity(
@@ -82,26 +82,26 @@ data class DailyResponse(
     )
 
     data class Precipitation(
-        val avg: Int,
+        val avg: Double,
         val date: String,
-        val max: Int,
-        val min: Int,
+        val max: Double,
+        val min: Double,
         val probability: Int
     )
 
     data class Precipitation08h20h(
-        val avg: Int,
+        val avg: Double,
         val date: String,
-        val max: Int,
-        val min: Int,
+        val max: Double,
+        val min: Double,
         val probability: Int
     )
 
     data class Precipitation20h32h(
-        val avg: Int,
+        val avg: Double,
         val date: String,
-        val max: Int,
-        val min: Int,
+        val max: Double,
+        val min: Double,
         val probability: Int
     )
 
@@ -130,28 +130,28 @@ data class DailyResponse(
     data class Temperature(
         val avg: Double,
         val date: String,
-        val max: Int,
-        val min: Int
+        val max: Double,
+        val min: Double
     )
 
     data class Temperature08h20h(
         val avg: Double,
         val date: String,
-        val max: Int,
-        val min: Int
+        val max: Double,
+        val min: Double
     )
 
     data class Temperature20h32h(
         val avg: Double,
         val date: String,
         val max: Double,
-        val min: Int
+        val min: Double
     )
 
     data class Visibility(
-        val avg: Int,
+        val avg: Double,
         val date: String,
-        val max: Int,
+        val max: Double,
         val min: Double
     )
 
@@ -254,13 +254,13 @@ data class DailyResponse(
     )
 
     data class MinX(
-        val direction: Int,
-        val speed: Int
+        val direction: Double,
+        val speed: Double
     )
 
     data class AvgXXX(
         val direction: Double,
-        val speed: Int
+        val speed: Double
     )
 
     data class MinXXX(

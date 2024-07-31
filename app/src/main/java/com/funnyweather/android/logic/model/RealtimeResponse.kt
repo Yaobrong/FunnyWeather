@@ -21,7 +21,7 @@ data class RealtimeResponse(
         val air_quality: AirQuality,
         val apparent_temperature: Double,
         val cloudrate: Double,
-        val dswrf: Int,
+        val dswrf: Double,
         val humidity: Double,
         val life_index: LifeIndex,
         val precipitation: Precipitation,
@@ -35,7 +35,7 @@ data class RealtimeResponse(
 
     data class AirQuality(
         val aqi: Aqi,
-        val co: Int,
+        val co: Double,
         val description: Description,
         val no2: Int,
         val o3: Int,
@@ -81,7 +81,7 @@ data class RealtimeResponse(
 
     data class Local(
         val datasource: String,
-        val intensity: Int,
+        val intensity: Double,
         val status: String
     )
 

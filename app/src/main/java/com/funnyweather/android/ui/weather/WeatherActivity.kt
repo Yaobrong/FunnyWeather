@@ -3,6 +3,7 @@ package com.funnyweather.android.ui.weather
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -25,10 +26,10 @@ class WeatherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val decorView = window.decorView
-        decorView.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        window.statusBarColor = Color.TRANSPARENT
+//        val decorView = window.decorView
+//        decorView.systemUiVisibility =
+//            View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+//        window.statusBarColor = Color.TRANSPARENT
         setContentView(R.layout.activity_weather)
 
         if (viewModel.locationLng.isEmpty()) {
@@ -56,14 +57,14 @@ class WeatherActivity : AppCompatActivity() {
         placeName.text = viewModel.placeName
         val realtime = weather.realtime
         val daily = weather.daily
-        //data connect -> now.xml
+        //data connect ==> now.xml
         val currentTempText = "${realtime.temperature.toInt()} ℃"
         currentTemp.text = currentTempText
         currentSky.text = getSky(realtime.skycon).info
         val currentPM25Text = "空气指数${realtime.air_quality.aqi.chn.toInt()}"
         currentAQI.text = currentPM25Text
         nowLayout.setBackgroundResource(getSky(realtime.skycon).bg)
-        //data connect -> forecast.xml
+        //data connect ==> forecast.xml
         forecastLayout.removeAllViews()
         val days = daily.skycon.size
         for (i in 0 until days) {
@@ -76,8 +77,11 @@ class WeatherActivity : AppCompatActivity() {
             val skyIcon = view.findViewById(R.id.skyIcon) as ImageView
             val skyInfo = view.findViewById(R.id.skyInfo) as TextView
             val temperatureInfo = view.findViewById(R.id.temperatureInfo) as TextView
+            //将 skycon.date 的字符串转换为 Date 对象，然后再进行格式化
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.getDefault())
             val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            dataInfo.text = simpleDateFormat.format(skycon.date)
+            val formattedDate = simpleDateFormat.format(dateFormat.parse(skycon.date))
+            dataInfo.text = formattedDate
             val sky = getSky(skycon.value)
             skyIcon.setImageResource(sky.icon)
             skyInfo.text = sky.info
@@ -85,7 +89,7 @@ class WeatherActivity : AppCompatActivity() {
             temperatureInfo.text = tempText
             forecastLayout.addView(view)
         }
-        //data connect -> life_index.xml
+        //data connect ==> life_index.xml
         val lifeIndex = daily.life_index
         coldRiskText.text = lifeIndex.coldRisk[0].desc
         dressingText.text = lifeIndex.dressing[0].desc
