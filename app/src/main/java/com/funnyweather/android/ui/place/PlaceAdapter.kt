@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.funnyweather.android.R
 import com.funnyweather.android.logic.model.Place
 import com.funnyweather.android.ui.weather.WeatherActivity
 
-class PlaceAdapter(private val fragment: Fragment, private val placeList: List<Place>) :
+class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: List<Place>) :
     RecyclerView.Adapter<PlaceAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,7 +29,9 @@ class PlaceAdapter(private val fragment: Fragment, private val placeList: List<P
                 putExtra("location_lat", place.location.lat)
                 putExtra("place_name", place.name)
             }
+            fragment.viewModel.savePlace(place)
             fragment.startActivity(intent)
+            fragment.activity?.finish()
         }
         return holder
     }

@@ -2,6 +2,7 @@ package com.funnyweather.android.logic
 
 
 import androidx.lifecycle.liveData
+import com.funnyweather.android.logic.dao.PlaceDao
 import com.funnyweather.android.logic.model.Place
 import com.funnyweather.android.logic.model.Weather
 import com.funnyweather.android.logic.network.WeatherNetwork
@@ -15,6 +16,13 @@ import kotlin.coroutines.CoroutineContext
  */
 
 object Repository {
+
+    fun savePlace(place: Place) = PlaceDao.savePlace(place)
+
+    fun getSavedPlace() = PlaceDao.getSavedPlace()
+
+    fun isPlaceSaved() = PlaceDao.isPlaceSaved()
+
     fun searchPlaces(query: String) = fire(Dispatchers.IO) {
         val placeResponse = WeatherNetwork.searchPlaces(query)
         if (placeResponse.status == "ok") {
